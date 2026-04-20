@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alibaba Security Research Themes</title>
+  <meta
+    name="description"
+    content="Research Themes by Alibaba Security: MetaCompress and RiskGen-Enhance."
+  />
+  <style>
+    :root{
+      --bg-1:#070b16;
+      --bg-2:#0b1020;
+      --bg-3:#111936;
+      --card-1:rgba(18,25,53,.88);
+      --card-2:rgba(13,18,40,.92);
+      --text:#edf3ff;
+      --muted:#aab5d1;
+      --line:rgba(255,255,255,0.08);
+      --line-strong:rgba(255,255,255,0.14);
+      --brand:#78a6ff;
+      --brand-soft:rgba(120,166,255,0.14);
+      --brand-border:rgba(120,166,255,0.24);
+      --glow:0 12px 40px rgba(0,0,0,0.32);
+      --glow-soft:0 0 0 1px rgba(255,255,255,0.03) inset;
+      --max:980px;
+      --radius-xl:24px;
+      --radius-lg:20px;
+      --radius-md:16px;
+    }
+
+    *{
+      box-sizing:border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html{
+      -webkit-text-size-adjust:100%;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color:var(--text);
+      line-height:1.68;
+      background:
+        radial-gradient(1000px 500px at 10% -10%, rgba(120,166,255,.16), transparent 55%),
+        radial-gradient(900px 500px at 100% 0%, rgba(63,110,255,.10), transparent 45%),
+        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 45%, #0b1020 100%);
+      min-height:100vh;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .container{
+      width:min(var(--max), calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:20;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background:rgba(7,11,22,.58);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+
+    .nav-inner{
+      min-height:60px;
+      display:flex;
+      align-items:center;
+    }
+
+    .brand{
+      font-size:18px;
+      font-weight:700;
+      letter-spacing:.2px;
+      color:#f3f7ff;
+    }
+
+    .hero{
+      padding:48px 0 24px;
+    }
+
+    .hero-wrap{
+      position:relative;
+      padding:34px 34px 10px;
+      border-radius:var(--radius-xl);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
+      border:1px solid rgba(255,255,255,.06);
+      box-shadow: var(--glow), var(--glow-soft);
+      overflow:hidden;
+    }
+
+    .hero-wrap::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:
+        radial-gradient(500px 140px at 0% 0%, rgba(120,166,255,.14), transparent 60%);
+      pointer-events:none;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:var(--brand-soft);
+      color:#d6e4ff;
+      border:1px solid var(--brand-border);
+      font-size:13px;
+      margin-bottom:18px;
+      position:relative;
+      z-index:1;
+    }
+
+    .hero h1{
+      margin:0 0 14px;
+      font-size:clamp(34px, 5vw, 56px);
+      line-height:1.04;
+      letter-spacing:-0.035em;
+      position:relative;
+      z-index:1;
+      text-wrap:balance;
+    }
+
+    .hero p{
+      margin:0;
+      max-width:820px;
+      color:var(--muted);
+      font-size:18px;
+      position:relative;
+      z-index:1;
+    }
+
+    .main-section{
+      padding:18px 0 56px;
+    }
+
+    .theme-list{
+      display:flex;
+      flex-direction:column;
+      gap:22px;
+    }
+
+    .theme-card{
+      position:relative;
+      padding:30px;
+      border-radius:var(--radius-xl);
+      background:
+        linear-gradient(180deg, var(--card-1), var(--card-2));
+      border:1px solid var(--line);
+      box-shadow:var(--glow), var(--glow-soft);
+      overflow:hidden;
+    }
+
+    .theme-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(420px 120px at 0% 0%, rgba(120,166,255,.10), transparent 60%);
+      pointer-events:none;
+    }
+
+    .theme-card > *{
+      position:relative;
+      z-index:1;
+    }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      padding:6px 11px;
+      border-radius:999px;
+      background:var(--brand-soft);
+      color:#d6e4ff;
+      border:1px solid var(--brand-border);
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:.02em;
+      margin-bottom:14px;
+    }
+
+    .theme-card h3{
+      margin:0 0 14px;
+      font-size:25px;
+      line-height:1.28;
+      letter-spacing:-0.015em;
+      text-wrap:balance;
+    }
+
+    .theme-card p{
+      margin:0 0 16px;
+      color:var(--muted);
+      word-break:break-word;
+    }
+
+    .bullets{
+      margin:0 0 18px;
+      padding-left:20px;
+    }
+
+    .bullets li{
+      margin:10px 0;
+      color:var(--muted);
+    }
+
+    .bullets strong{
+      color:#f0f5ff;
+      font-weight:700;
+    }
+
+    .paper-list{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      margin-top:10px;
+    }
+
+    .paper{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:15px 16px;
+      border-radius:var(--radius-md);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.025));
+      border:1px solid rgba(255,255,255,.08);
+      transition:transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      box-shadow:0 1px 0 rgba(255,255,255,.02) inset;
+    }
+
+    .paper:hover{
+      transform:translateY(-2px);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.065), rgba(255,255,255,.03));
+      border-color:rgba(255,255,255,.12);
+      box-shadow:0 10px 24px rgba(0,0,0,.16);
+    }
+
+    .paper:active{
+      transform:scale(.995);
+    }
+
+    .paper-left{
+      min-width:0;
+    }
+
+    .paper-title{
+      font-weight:600;
+      font-size:15px;
+      color:var(--text);
+      line-height:1.45;
+    }
+
+    .paper small{
+      display:block;
+      color:var(--muted);
+      margin-top:4px;
+      font-size:12px;
+    }
+
+    .paper-link{
+      flex-shrink:0;
+      white-space:nowrap;
+      color:#dce7ff;
+      font-size:14px;
+      font-weight:700;
+      padding-left:10px;
+    }
+
+    .footer{
+      padding:18px 0 34px;
+      border-top:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    @media (max-width: 768px){
+      .container{
+        width:min(var(--max), calc(100% - 22px));
+      }
+
+      .nav-inner{
+        min-height:56px;
+      }
+
+      .brand{
+        font-size:16px;
+      }
+
+      .hero{
+        padding:24px 0 18px;
+      }
+
+      .hero-wrap{
+        padding:24px 18px 6px;
+        border-radius:20px;
+      }
+
+      .eyebrow{
+        font-size:12px;
+        padding:7px 10px;
+        margin-bottom:14px;
+      }
+
+      .hero h1{
+        font-size:clamp(28px, 8vw, 40px);
+        line-height:1.1;
+        margin-bottom:12px;
+      }
+
+      .hero p{
+        font-size:15px;
+        line-height:1.72;
+      }
+
+      .main-section{
+        padding:14px 0 36px;
+      }
+
+      .theme-list{
+        gap:16px;
+      }
+
+      .theme-card{
+        padding:20px 16px;
+        border-radius:20px;
+      }
+
+      .tag{
+        font-size:11px;
+        padding:6px 10px;
+        margin-bottom:12px;
+      }
+
+      .theme-card h3{
+        font-size:20px;
+        line-height:1.35;
+        margin-bottom:12px;
+      }
+
+      .theme-card p{
+        font-size:14px;
+        margin-bottom:14px;
+      }
+
+      .bullets{
+        padding-left:18px;
+        margin-bottom:16px;
+      }
+
+      .bullets li{
+        font-size:14px;
+        line-height:1.7;
+        margin:8px 0;
+      }
+
+      .paper{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:8px;
+        padding:14px;
+        border-radius:15px;
+      }
+
+      .paper-title{
+        font-size:14px;
+      }
+
+      .paper small{
+        font-size:12px;
+      }
+
+      .paper-link{
+        padding-left:0;
+        font-size:13px;
+        white-space:normal;
+      }
+
+      .footer{
+        padding:16px 0 26px;
+        font-size:13px;
+      }
+    }
+
+    @media (max-width: 420px){
+      .container{
+        width:min(var(--max), calc(100% - 16px));
+      }
+
+      .hero{
+        padding:18px 0 14px;
+      }
+
+      .hero-wrap{
+        padding:20px 14px 2px;
+      }
+
+      .hero h1{
+        font-size:28px;
+      }
+
+      .hero p{
+        font-size:14px;
+      }
+
+      .theme-card{
+        padding:18px 14px;
+      }
+
+      .theme-card h3{
+        font-size:18px;
+      }
+
+      .theme-card p,
+      .bullets li{
+        font-size:13.5px;
+      }
+
+      .paper{
+        padding:13px;
+      }
+
+      .paper-title{
+        font-size:13.5px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="brand">Alibaba Security Research</div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-wrap">
+          <div class="eyebrow">Technical Content by Alibaba Security</div>
+          <h1>Research Themes</h1>
+          <p>
+            This page highlights two research directions from Alibaba Security:
+            learning-based visual token compression for Large Vision-Language Models,
+            and multimodal generation-augmented risk-oriented visual understanding.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="main-section">
+      <div class="container">
+        <div class="theme-list">
+          <article class="theme-card">
+            <div class="tag">Theme 1</div>
+            <h3>MetaCompress – A Learning-Based Token Compression Approach</h3>
+            <p>
+              We introduce MetaCompress, a novel learning-based token reduction method that formulates visual token compression as a learnable mapping to replace suboptimal heuristic designs like attention scores. By employing a data-efficient training paradigm, MetaCompress achieves superior efficiency-accuracy trade-offs and robust generalization across multi-turn Visual Question Answering scenarios for Large Vision-Language Models.
+            </p>
+
+            <div class="paper-list">
+              <a class="paper" href="https://arxiv.org/pdf/2603.21701v1.pdf" target="_blank" rel="noopener">
+                <div class="paper-left">
+                  <div class="paper-title">Rethinking Token Reduction for Large Vision-Language Models</div>
+                  <small>PDF / arXiv</small>
+                </div>
+                <span class="paper-link">Open →</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="theme-card">
+            <div class="tag">Theme 2</div>
+            <h3>RiskGen-Enhance – A Multimodal Generation-Augmented Framework for Risk-Oriented Visual Understanding</h3>
+            <p>
+              In the context of risk management business practices at Alibaba Group, we have observed that multimodal generation yields substantial improvements in high-difficulty, fine-grained risk visual understanding capabilities. Motivated by these observations, we have integrated image generation techniques into the training pipeline of visual understanding models, with three key contributions:
+            </p>
+
+            <ul class="bullets">
+              <li>Incorporating spatial understanding priors into the training process to enhance geometric and structural comprehension; <strong>(CVPR 2026 SIMPLEPOSTER)</strong></li>
+              <li>Accelerate diffusion process through inference-time reasoning process refinement; <strong>(CVPR 2026 TC-Pade)</strong></li>
+              <li>Pioneering the proposal of a diffusion probe to identify and filter unavailable synthesized samples during large-scale data production <strong>(CVPR 2026 Diffusion Probe)</strong></li>
+            </ul>
+
+            <p>
+              These research efforts collectively serve as a critical foundation for the large-scale, high-throughput adversarial framework currently under development.
+            </p>
+
+            <div class="paper-list">
+              <a class="paper" href="https://arxiv.org/pdf/2602.23783v2.pdf" target="_blank" rel="noopener">
+                <div class="paper-left">
+                  <div class="paper-title">Diffusion Probe: Generated Image Result Prediction Using CNN Probes</div>
+                  <small>PDF / arXiv</small>
+                </div>
+                <span class="paper-link">Open →</span>
+              </a>
+
+              <a class="paper" href="https://arxiv.org/pdf/2602.23784.pdf" target="_blank" rel="noopener">
+                <div class="paper-left">
+                  <div class="paper-title">SIMPLEPOSTER: A SIMPLE BASELINE FOR PRODUCT POSTER GENERATION</div>
+                  <small>PDF / arXiv</small>
+                </div>
+                <span class="paper-link">Open →</span>
+              </a>
+
+              <a class="paper" href="https://arxiv.org/pdf/2603.02943v1.pdf" target="_blank" rel="noopener">
+                <div class="paper-left">
+                  <div class="paper-title">TC-Padé: Trajectory-Consistent Padé Approximation for Diffusion Acceleration</div>
+                  <small>PDF / arXiv</small>
+                </div>
+                <span class="paper-link">Open →</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2026 Alibaba Security Research
+    </div>
+  </footer>
+</body>
+</html>
