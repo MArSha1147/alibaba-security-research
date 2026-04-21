@@ -3,27 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alibaba Security Research Themes</title>
+  <title>Technical Content by Alibaba Security</title>
   <meta
     name="description"
-    content="Research Themes by Alibaba Security: MetaCompress and RiskGen-Enhance."
+    content="Technical Content by Alibaba Security: MetaCompress and RiskGen-Enhance."
   />
   <style>
     :root{
-      --bg-1:#070b16;
-      --bg-2:#0b1020;
-      --bg-3:#111936;
-      --card-1:rgba(18,25,53,.88);
-      --card-2:rgba(13,18,40,.92);
-      --text:#edf3ff;
-      --muted:#aab5d1;
-      --line:rgba(255,255,255,0.08);
-      --line-strong:rgba(255,255,255,0.14);
-      --brand:#78a6ff;
-      --brand-soft:rgba(120,166,255,0.14);
-      --brand-border:rgba(120,166,255,0.24);
-      --glow:0 12px 40px rgba(0,0,0,0.32);
-      --glow-soft:0 0 0 1px rgba(255,255,255,0.03) inset;
+      --bg-1:#f8fbfd;
+      --bg-2:#f5f8fb;
+      --bg-3:#eef3f6;
+
+      --text:#1f2937;
+      --muted:#5f6b7a;
+      --line:rgba(15,23,42,0.08);
+
+      --hero-glow-1:rgba(148,163,184,.10);
+      --hero-glow-2:rgba(99,102,241,.05);
+      --hero-glow-3:rgba(251,191,36,.05);
+
+      --blue:#4f7cff;
+      --blue-soft:rgba(79,124,255,.12);
+      --blue-border:rgba(79,124,255,.22);
+
+      --teal:#3f8f86;
+      --teal-soft:rgba(63,143,134,.07);
+      --teal-border:rgba(63,143,134,.14);
+
+      --card-shadow:0 12px 32px rgba(31,41,55,.07);
+      --card-inner:0 0 0 1px rgba(255,255,255,.72) inset;
+
       --max:980px;
       --radius-xl:24px;
       --radius-lg:20px;
@@ -46,9 +55,10 @@
       color:var(--text);
       line-height:1.68;
       background:
-        radial-gradient(1000px 500px at 10% -10%, rgba(120,166,255,.16), transparent 55%),
-        radial-gradient(900px 500px at 100% 0%, rgba(63,110,255,.10), transparent 45%),
-        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 45%, #0b1020 100%);
+        radial-gradient(760px 340px at 0% 0%, rgba(148,163,184,.08), transparent 58%),
+        radial-gradient(680px 300px at 100% 0%, rgba(79,124,255,.05), transparent 52%),
+        radial-gradient(620px 280px at 50% 100%, rgba(245,158,11,.04), transparent 55%),
+        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 52%, var(--bg-3) 100%);
       min-height:100vh;
     }
 
@@ -68,8 +78,8 @@
       z-index:20;
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      background:rgba(7,11,22,.58);
-      border-bottom:1px solid rgba(255,255,255,.06);
+      background:rgba(255,255,255,.80);
+      border-bottom:1px solid var(--line);
     }
 
     .nav-inner{
@@ -82,7 +92,7 @@
       font-size:18px;
       font-weight:700;
       letter-spacing:.2px;
-      color:#f3f7ff;
+      color:#1e293b;
     }
 
     .hero{
@@ -94,9 +104,9 @@
       padding:34px 34px 10px;
       border-radius:var(--radius-xl);
       background:
-        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
-      border:1px solid rgba(255,255,255,.06);
-      box-shadow: var(--glow), var(--glow-soft);
+        linear-gradient(180deg, rgba(255,255,255,.92), rgba(249,251,253,.90));
+      border:1px solid rgba(15,23,42,.06);
+      box-shadow:var(--card-shadow), var(--card-inner);
       overflow:hidden;
     }
 
@@ -105,23 +115,10 @@
       position:absolute;
       inset:-1px;
       background:
-        radial-gradient(500px 140px at 0% 0%, rgba(120,166,255,.14), transparent 60%);
+        radial-gradient(420px 140px at 0% 0%, var(--hero-glow-1), transparent 60%),
+        radial-gradient(420px 160px at 100% 0%, var(--hero-glow-2), transparent 60%),
+        radial-gradient(260px 120px at 50% 100%, var(--hero-glow-3), transparent 60%);
       pointer-events:none;
-    }
-
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 12px;
-      border-radius:999px;
-      background:var(--brand-soft);
-      color:#d6e4ff;
-      border:1px solid var(--brand-border);
-      font-size:13px;
-      margin-bottom:18px;
-      position:relative;
-      z-index:1;
     }
 
     .hero h1{
@@ -132,6 +129,7 @@
       position:relative;
       z-index:1;
       text-wrap:balance;
+      color:#111827;
     }
 
     .hero p{
@@ -157,20 +155,10 @@
       position:relative;
       padding:30px;
       border-radius:var(--radius-xl);
-      background:
-        linear-gradient(180deg, var(--card-1), var(--card-2));
-      border:1px solid var(--line);
-      box-shadow:var(--glow), var(--glow-soft);
+      border:1px solid rgba(15,23,42,.08);
+      box-shadow:var(--card-shadow), var(--card-inner);
       overflow:hidden;
-    }
-
-    .theme-card::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(420px 120px at 0% 0%, rgba(120,166,255,.10), transparent 60%);
-      pointer-events:none;
+      background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(249,251,255,.97));
     }
 
     .theme-card > *{
@@ -178,18 +166,66 @@
       z-index:1;
     }
 
+    .theme-card.theme-1{
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.99), rgba(244,248,255,.99));
+      border:1px solid rgba(79,124,255,.18);
+      box-shadow:
+        0 16px 38px rgba(79,124,255,.08),
+        0 10px 24px rgba(31,41,55,.05),
+        0 0 0 1px rgba(255,255,255,.82) inset;
+    }
+
+    .theme-card.theme-1::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(460px 150px at 0% 0%, rgba(79,124,255,.16), transparent 58%),
+        linear-gradient(180deg, rgba(79,124,255,.03), rgba(255,255,255,0) 42%);
+      pointer-events:none;
+    }
+
+    .theme-card.theme-2{
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.94), rgba(248,251,250,.96));
+      border:1px solid rgba(63,143,134,.10);
+      box-shadow:
+        0 12px 28px rgba(31,41,55,.05),
+        0 0 0 1px rgba(255,255,255,.72) inset;
+    }
+
+    .theme-card.theme-2::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(420px 120px at 0% 0%, rgba(63,143,134,.06), transparent 60%);
+      pointer-events:none;
+    }
+
     .tag{
       display:inline-flex;
       align-items:center;
       padding:6px 11px;
       border-radius:999px;
-      background:var(--brand-soft);
-      color:#d6e4ff;
-      border:1px solid var(--brand-border);
       font-size:12px;
       font-weight:600;
       letter-spacing:.02em;
       margin-bottom:14px;
+    }
+
+    .theme-1 .tag{
+      background:rgba(79,124,255,.13);
+      color:#2f5fd6;
+      border:1px solid rgba(79,124,255,.24);
+      box-shadow:0 1px 0 rgba(255,255,255,.72) inset;
+    }
+
+    .theme-2 .tag{
+      background:rgba(63,143,134,.07);
+      color:#2e7d74;
+      border:1px solid rgba(63,143,134,.14);
     }
 
     .theme-card h3{
@@ -198,6 +234,7 @@
       line-height:1.28;
       letter-spacing:-0.015em;
       text-wrap:balance;
+      color:#111827;
     }
 
     .theme-card p{
@@ -217,7 +254,7 @@
     }
 
     .bullets strong{
-      color:#f0f5ff;
+      color:#1f2937;
       font-weight:700;
     }
 
@@ -235,19 +272,35 @@
       gap:14px;
       padding:15px 16px;
       border-radius:var(--radius-md);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.025));
-      border:1px solid rgba(255,255,255,.08);
+      border:1px solid rgba(15,23,42,.08);
       transition:transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
-      box-shadow:0 1px 0 rgba(255,255,255,.02) inset;
+      box-shadow:0 1px 0 rgba(255,255,255,.9) inset;
     }
 
-    .paper:hover{
-      transform:translateY(-2px);
+    .theme-1 .paper{
       background:
-        linear-gradient(180deg, rgba(255,255,255,.065), rgba(255,255,255,.03));
-      border-color:rgba(255,255,255,.12);
-      box-shadow:0 10px 24px rgba(0,0,0,.16);
+        linear-gradient(180deg, rgba(79,124,255,.10), rgba(255,255,255,.98));
+      border:1px solid rgba(79,124,255,.14);
+    }
+
+    .theme-2 .paper{
+      background:
+        linear-gradient(180deg, rgba(63,143,134,.04), rgba(255,255,255,.95));
+      border:1px solid rgba(63,143,134,.10);
+    }
+
+    .theme-1 .paper:hover{
+      transform:translateY(-2px);
+      border-color:rgba(79,124,255,.26);
+      box-shadow:
+        0 12px 24px rgba(79,124,255,.09),
+        0 8px 18px rgba(31,41,55,.06);
+    }
+
+    .theme-2 .paper:hover{
+      transform:translateY(-2px);
+      border-color:rgba(63,143,134,.16);
+      box-shadow:0 10px 22px rgba(31,41,55,.06);
     }
 
     .paper:active{
@@ -272,10 +325,17 @@
       font-size:12px;
     }
 
+    .theme-1 .paper-link{
+      color:#315ccf;
+    }
+
+    .theme-2 .paper-link{
+      color:#2e7d74;
+    }
+
     .paper-link{
       flex-shrink:0;
       white-space:nowrap;
-      color:#dce7ff;
       font-size:14px;
       font-weight:700;
       padding-left:10px;
@@ -283,7 +343,7 @@
 
     .footer{
       padding:18px 0 34px;
-      border-top:1px solid rgba(255,255,255,.06);
+      border-top:1px solid var(--line);
       color:var(--muted);
       font-size:14px;
     }
@@ -308,12 +368,6 @@
       .hero-wrap{
         padding:24px 18px 6px;
         border-radius:20px;
-      }
-
-      .eyebrow{
-        font-size:12px;
-        padding:7px 10px;
-        margin-bottom:14px;
       }
 
       .hero h1{
@@ -451,8 +505,7 @@
     <section class="hero">
       <div class="container">
         <div class="hero-wrap">
-          <div class="eyebrow">Technical Content by Alibaba Security</div>
-          <h1>Research Themes</h1>
+          <h1>Technical Content by Alibaba Security</h1>
           <p>
             This page highlights two research directions from Alibaba Security:
             learning-based visual token compression for Large Vision-Language Models,
@@ -465,7 +518,7 @@
     <section class="main-section">
       <div class="container">
         <div class="theme-list">
-          <article class="theme-card">
+          <article class="theme-card theme-1">
             <div class="tag">Theme 1</div>
             <h3>MetaCompress – A Learning-Based Token Compression Approach</h3>
             <p>
@@ -483,7 +536,7 @@
             </div>
           </article>
 
-          <article class="theme-card">
+          <article class="theme-card theme-2">
             <div class="tag">Theme 2</div>
             <h3>RiskGen-Enhance – A Multimodal Generation-Augmented Framework for Risk-Oriented Visual Understanding</h3>
             <p>
